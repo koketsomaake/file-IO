@@ -17,27 +17,30 @@ public class Visitor {
 
     private static final Logger logger = LogManager.getLogger(Visitor.class.getName());
 
-    public static void save(String fullName, int age, String comments, String assistantName) throws IOException {
+    public static void save(String fullName, int age, String comment, String assistantName) throws IOException {
         try{
         File myObj = new File("visitor_"+fullName.replace(" ","_")+".txt");
+
+        if(myObj.createNewFile()){
+                logger.info("File has been created"+ myObj.getName());
+            }
+            else{
+                logger.error("File already exist");
+
+            }
 
         FileWriter FW = new FileWriter(myObj);
 
         FW.write(
                 "full name: "+fullName
                 + "\n"+"age: "+age
-                + "\n" +"comments: "+ comments
+                + "\n" +"comments: "+ comment
                 +"\n"+"assistanceName: "+ assistantName
                 + "\n" +"Time: "+ LocalTime.now()
                 + "\n"+ "Date: "+ LocalDate.now());
-        FW.close();
+            FW.close();
 
-            if(myObj.createNewFile()){
-                logger.info("File has been created"+ myObj.getName());
-            }
-                else{
-                System.out.println("File already exist");
-            }
+
             }
 
         catch (IOException e) {
@@ -47,35 +50,38 @@ public class Visitor {
     }
     public static void load(String read) throws FileNotFoundException {
         File myObj = new File("filename.txt");
-//        Scanner myReader = null;
+
         try {
-            Scanner  myReader = new Scanner(myObj);
+            Scanner  myOb = new Scanner(myObj);
 
 
-        while (myReader.hasNextLine()) {
-            String data = myReader.nextLine();
+        while (myObj.createNewFile()) {
+            String data = myOb.nextLine();
             System.out.println(data);
         }
-            myReader.close();
+            myOb.close();
         } catch (FileNotFoundException e) {
             logger.error("An error occurred.");
             e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-
     public static void main(String[] args) throws IOException{
         Scanner sc = new Scanner(System.in);
-        System.out.println("please enter fullName");
-         fullName = sc.nextLine();
-        System.out.println("please enter age");
-        age = sc.nextInt();
-        System.out.println("comment");
-        comment = sc.nextLine();
-        System.out.println("Assistant name");
-        assistantName = sc.nextLine();
 
-        System.out.println();
-        }
+        System.out.print("please enter fullName");
+         fullName = sc.nextLine();
+
+         System.out.print("Age");
+         age = sc.nextInt();
+
+        System.out.print("comment");
+        comment = sc.nextLine();
+
+        System.out.print("assistantName");
+        assistantName = sc.nextLine();
+    }
     }
 
 
