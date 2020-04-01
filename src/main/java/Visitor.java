@@ -54,7 +54,6 @@ public class Visitor {
         try {
             Scanner  myOb = new Scanner(myObj);
 
-
         while (myObj.createNewFile()) {
             String data = myOb.nextLine();
             System.out.println(data);
@@ -68,20 +67,18 @@ public class Visitor {
         }
     }
     public static void main(String[] args) throws IOException{
+        String read = "";
         Scanner sc = new Scanner(System.in);
-
-        System.out.print("please enter fullName");
-         fullName = sc.nextLine();
-
-         System.out.print("Age");
-         age = sc.nextInt();
-
-        System.out.print("comment");
-        comment = sc.nextLine();
-
-        System.out.print("assistantName");
-        assistantName = sc.nextLine();
-    }
+        System.out.println("please enter fullName");
+        fullName = sc.nextLine();
+        System.out.println("Age");
+        age = sc.nextInt();
+        System.out.println("comment");
+        comment = sc.next();
+        System.out.println("assistantName");
+        assistantName = sc.next();
+        save(fullName,age,comment,assistantName);
+        load(read);}
     }
 
 
