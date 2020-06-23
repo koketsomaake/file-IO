@@ -17,11 +17,11 @@ public class Visitor {
 
     private static final Logger logger = LogManager.getLogger(Visitor.class.getName());
 
-    public static void save(String fullName, int age, String comment, String assistantName) throws IOException {
+    public static boolean save(String fullName, int age, String comment, String assistantName) throws IOException {
         try{
-        File myObj = new File("visitor_"+fullName.replace(" ","_")+".txt");
+            File myObj = new File("visitor_"+fullName.replace(" ","_")+".txt");
 
-        if(myObj.createNewFile()){
+            if(myObj.createNewFile()){
                 logger.info("File has been created"+ myObj.getName());
             }
             else{
@@ -29,42 +29,43 @@ public class Visitor {
 
             }
 
-        FileWriter FW = new FileWriter(myObj);
+            FileWriter FW = new FileWriter(myObj);
 
-        FW.write(
-                "full name: "+fullName
-                + "\n"+"age: "+age
-                + "\n" +"comments: "+ comment
-                +"\n"+"assistanceName: "+ assistantName
-                + "\n" +"Time: "+ LocalTime.now()
-                + "\n"+ "Date: "+ LocalDate.now());
+            FW.write(
+                    "full name: "+fullName
+                            + "\n"+"age: "+age
+                            + "\n" +"comments: "+ comment
+                            +"\n"+"assistanceName: "+ assistantName
+                            + "\n" +"Time: "+ LocalTime.now()
+                            + "\n"+ "Date: "+ LocalDate.now());
             FW.close();
 
 
-            }
+        }
 
         catch (IOException e) {
             logger.error("An error occurred");
             e.printStackTrace();
         }
+        return true;
     }
-    public static void load(String read) throws FileNotFoundException {
-        File myObj = new File("filename.txt");
+    public static String load(String fullName) throws FileNotFoundException {
 
-        try {
-            Scanner  myOb = new Scanner(myObj);
-
-        while (myObj.createNewFile()) {
-            String data = myOb.nextLine();
-            System.out.println(data);
-        }
-            myOb.close();
+        try{
+            File visitorFile = new File("visitor_ " +
+                    fullName.replace(" ", "_")+".txt");
+            Scanner reader = new Scanner(visitorFile);
+            while (reader.hasNextLine()) {
+                String data = reader.nextLine();
+                System.out.println(data);
+            }
+            reader.close();
         } catch (FileNotFoundException e) {
-            logger.error("An error occurred.");
-            e.getMessage();
-        } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("File not Found");
+            e.getStackTrace();
+
         }
+        return fullName;
     }
     public static void main(String[] args) throws IOException{
         String read = "";
@@ -78,7 +79,8 @@ public class Visitor {
         System.out.println("assistantName");
         assistantName = sc.next();
         save(fullName,age,comment,assistantName);
-        load(read);}
+//        load(fullName);
     }
+}
 
 

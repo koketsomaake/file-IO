@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="VisitorsTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-06-23T12:54:46" hostname="koketso-HP-15-Notebook-PC" time="5.765">
+  <properties/>
+  <testcase name="load" classname="VisitorsTest" time="5.615"/>
+  <testcase name="saves" classname="VisitorsTest" time="0.15"/>
+  <system-out><![CDATA[14:54:52.106 [Test worker] ERROR Visitor - File not Found
+14:54:52.323 [Test worker] ERROR Visitor - File already exist
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
